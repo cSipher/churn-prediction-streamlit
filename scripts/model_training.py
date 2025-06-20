@@ -5,6 +5,11 @@ from sklearn.metrics import accuracy_score, classification_report, confusion_mat
 from xgboost import XGBClassifier
 from imblearn.over_sampling import SMOTE
 import joblib
+import os
+
+# Make sure 'models' folder exists
+os.makedirs('models', exist_ok=True)
+
 
 # Step 1: Load the cleaned + feature-engineered dataset
 df = pd.read_csv('../data/cleaned_churn.csv')
@@ -64,7 +69,7 @@ print("\n📊 Classification Report:\n", classification_report(y_test, y_pred))
 print("\n🧾 Confusion Matrix:\n", confusion_matrix(y_test, y_pred))
 
 # Step 10: Save the final model and scaler
-joblib.dump(model, '../models/churn_model.pkl')
-joblib.dump(scaler, '../models/scaler.pkl')
+joblib.dump(model, 'models/churn_model.pkl')
+joblib.dump(scaler, 'models/scaler.pkl')
 
 print("✅ Tuned XGBoost model and scaler saved successfully.")
